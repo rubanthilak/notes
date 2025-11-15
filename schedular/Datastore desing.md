@@ -29,7 +29,14 @@ You will store foreign references using `user_id`.
 
 # 🍀 **2. projects**
 
-`projects (   id            CHAR(36) PRIMARY KEY,   user_id       CHAR(36) NOT NULL,  -- supabase user id   name          VARCHAR(255) NOT NULL,   created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP )  INDEX (user_id)`
+```sql
+projects (   
+id            CHAR(36) PRIMARY KEY,   
+user_id       CHAR(36) NOT NULL,  -- supabase user id   
+name          VARCHAR(255) NOT NULL,   
+created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP )  
+INDEX (user_id)
+```
 
 ---
 

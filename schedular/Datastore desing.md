@@ -78,7 +78,7 @@ This is fastest and simplest for MVP.
 ### Represents each scheduled task.
 
 ```sql
-jobs (   
+webhooks (   
 	id               CHAR(36) PRIMARY KEY,   
 	job_id           CHAR(36) NOT NULL,   
 	url              VARCHAR(1024) NOT NULL,

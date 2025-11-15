@@ -160,7 +160,15 @@ CREATE TABLE webhook_results (
 
 Useful if users want server-to-server calls.
 
-`api_keys (   id          CHAR(36) PRIMARY KEY,   project_id  CHAR(36) NOT NULL,   key_hash    CHAR(64) NOT NULL,  -- hashed API key   created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP )  INDEX (project_id)`
+```sql
+api_keys (   
+	id          CHAR(36) PRIMARY KEY,   
+	project_id  CHAR(36) NOT NULL,   
+	key_hash    CHAR(64) NOT NULL,  -- hashed API key   
+	created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+)  
+INDEX (project_id)
+```
 
 ---
 
@@ -168,7 +176,9 @@ Useful if users want server-to-server calls.
 
 If you build **active-active scheduling** (multiple schedulers):
 
-`scheduler_locks (   key        VARCHAR(64) PRIMARY KEY,   -- "scheduler-global" or "job-{id}"   owner_id   VARCHAR(64),               -- instance id   expires_at TIMESTAMP )`
+```sql
+scheduler_locks (   key        VARCHAR(64) PRIMARY KEY,   -- "scheduler-global" or "job-{id}"   owner_id   VARCHAR(64),               -- instance id   expires_at TIMESTAMP )
+```
 
 ---
 

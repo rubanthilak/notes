@@ -73,6 +73,33 @@ INDEX (enabled)
 This is fastest and simplest for MVP.
 
 ---
+# 🍀 **3. jobs**
+
+### Represents each scheduled task.
+
+```sql
+jobs (   
+	id               CHAR(36) PRIMARY KEY,   
+	project_id       CHAR(36) NOT NULL,   
+	name             VARCHAR(255) NOT NULL,   
+	schedule         VARCHAR(50) NOT NULL,          -- cron string   
+	type             INT NOT NULL,   
+	timezone         VARCHAR(50) DEFAULT 'UTC',      
+	enabled          BOOLEAN DEFAULT TRUE,      
+	last_run_at      TIMESTAMP NULL,   
+	next_run_at      TIMESTAMP NOT NULL,            -- precomputed cron    
+	created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   
+	updated_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
+) 
+INDEX (project_id) 
+INDEX (next_run_at)       -- critical for scheduler
+INDEX (enabled)
+```
+
+👉 **Workers will poll jobs WHERE next_run_at <= now() AND enabled = 1**  
+This is fastest and simplest for MVP.
+
+---
 
 # 🍀 **4. job_executions**
 

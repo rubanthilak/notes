@@ -56,7 +56,7 @@ jobs (
 	project_id       CHAR(36) NOT NULL,   
 	name             VARCHAR(255) NOT NULL,   
 	schedule         VARCHAR(50) NOT NULL,          -- cron string   
-	webhook_url      TEXT NOT NULL,   
+	type             INT NOT NULL,   
 	timezone         VARCHAR(50) DEFAULT 'UTC',      
 	enabled          BOOLEAN DEFAULT TRUE,      
 	last_run_at      TIMESTAMP NULL,   

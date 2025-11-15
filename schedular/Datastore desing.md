@@ -21,7 +21,12 @@ Designed with:
 
 You won’t maintain this table. Supabase manages:
 
-`auth.users   id (uuid) PK   email   created_at`
+```sql
+auth.users   
+id (uuid) PK   
+email   
+created_at
+```
 
 You will store foreign references using `user_id`.
 

@@ -90,7 +90,7 @@ webhooks (
     content_type        VARCHAR(100) DEFAULT 'application/json',
 	created_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   
 	updated_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
-	
+	FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE
 ) 
 INDEX (job_id) 
 ```
@@ -118,7 +118,44 @@ job_executions (
 INDEX (job_id) INDEX (created_at)
 ```
 ---
+# 🍀 **4. webhook_results**
 
+### Logs each attempt.
+
+```sql
+CREATE TABLE webhook_results (
+    id                     BIGINT PRIMARY KEY AUTO_INCREMENT,
+
+    webhook_id             CHAR(36) NOT NULL,     -- from webhooks table
+    job_execution_id       CHAR(36) NOT NULL,     -- from job_executions table
+
+    attempt_number         INT NOT NULL DEFAULT 1,  -- 1 = first attempt
+
+    triggered_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    request_url            VARCHAR(1024) NOT NULL,
+    request_method         VARCHAR(10) NOT NULL,
+    request_headers        JSON NULL,
+    request_body           LONGTEXT NULL,
+
+    response_status        INT NULL,
+    response_headers       JSON NULL,
+    response_body          LONGTEXT NULL,
+
+    error_message          TEXT NULL,
+    duration_ms            INT NULL,
+
+    is_success             BOOLEAN NOT NULL DEFAULT FALSE,
+
+    created_at             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (webhook_id) 
+        REFERENCES webhooks(id) ON DELETE CASCADE,
+
+    FOREIGN KEY (job_execution_id) 
+        REFERENCES job_executions(id) ON DELETE CASCADE
+);
+```
 # 🍀 **5. api_keys (optional MVP)**
 
 Useful if users want server-to-server calls.

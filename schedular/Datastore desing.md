@@ -90,6 +90,7 @@ webhooks (
     content_type        VARCHAR(100) DEFAULT 'application/json',
 	created_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   
 	updated_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
+	FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE
 ) 
 INDEX (job_id) 
 ```

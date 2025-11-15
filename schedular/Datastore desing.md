@@ -79,16 +79,19 @@ This is fastest and simplest for MVP.
 
 ```sql
 webhooks (   
-	id               CHAR(36) PRIMARY KEY,   
-	job_id           CHAR(36) NOT NULL,   
-	url              VARCHAR(1024) NOT NULL,
-	
-	created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   
-	updated_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
+	id                  CHAR(36) PRIMARY KEY,   
+	job_id              CHAR(36) NOT NULL,   
+	url                 VARCHAR(1024) NOT NULL,
+	method              ENUM('GET', 'POST', 'PUT', 'PATCH', 'DELETE') 
+                            NOT NULL DEFAULT 'POST',
+    headers             JSON NULL,
+    query_params        JSON NULL,
+    body_template       TEXT NULL,
+    content_type        VARCHAR(100) DEFAULT 'application/json',
+	created_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   
+	updated_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
 ) 
-INDEX (project_id) 
-INDEX (next_run_at)       -- critical for scheduler
-INDEX (enabled)
+INDEX (job_id) 
 ```
 
 👉 **Workers will poll jobs WHERE next_run_at <= now() AND enabled = 1**  

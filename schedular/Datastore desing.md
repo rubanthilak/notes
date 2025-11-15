@@ -111,8 +111,6 @@ job_executions (
 	status           ENUM('pending', 'success', 'failure') NOT NULL,   
 	started_at       TIMESTAMP NULL,   
 	finished_at      TIMESTAMP NULL,  
-	response_code    INT NULL,   
-	response_body    MEDIUMTEXT NULL,   
 	created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 )  
 INDEX (job_id) INDEX (created_at)

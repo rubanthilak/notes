@@ -76,8 +76,18 @@ This is fastest and simplest for MVP.
 
 ### Logs each attempt.
 
-`job_executions (   id               CHAR(36) PRIMARY KEY,   job_id           CHAR(36) NOT NULL,   status           ENUM('pending', 'success', 'failure') NOT NULL,   started_at       TIMESTAMP NULL,   finished_at      TIMESTAMP NULL,   response_code    INT NULL,   response_body    MEDIUMTEXT NULL,   created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP )  INDEX (job_id) INDEX (created_at)`
-
+```sql
+job_executions (   
+id               CHAR(36) PRIMARY KEY,   
+job_id           CHAR(36) NOT NULL,   
+status           ENUM('pending', 'success', 'failure') NOT NULL,   
+started_at       TIMESTAMP NULL,   
+finished_at      TIMESTAMP NULL,  
+response_code    INT NULL,   
+response_body    MEDIUMTEXT NULL,   
+created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP )  
+INDEX (job_id) INDEX (created_at)
+```
 ---
 
 # 🍀 **5. api_keys (optional MVP)**

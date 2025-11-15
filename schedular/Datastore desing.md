@@ -130,8 +130,6 @@ CREATE TABLE webhook_results (
     webhook_id             CHAR(36) NOT NULL,     -- from webhooks table
     job_execution_id       CHAR(36) NOT NULL,     -- from job_executions table
 
-    attempt_number         INT NOT NULL DEFAULT 1,  -- 1 = first attempt
-
     triggered_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     request_url            VARCHAR(1024) NOT NULL,

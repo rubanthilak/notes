@@ -177,7 +177,11 @@ INDEX (project_id)
 If you build **active-active scheduling** (multiple schedulers):
 
 ```sql
-scheduler_locks (   key        VARCHAR(64) PRIMARY KEY,   -- "scheduler-global" or "job-{id}"   owner_id   VARCHAR(64),               -- instance id   expires_at TIMESTAMP )
+scheduler_locks (   
+	key        VARCHAR(64) PRIMARY KEY,   -- "scheduler-global" or "job-{id}"   
+	owner_id   VARCHAR(64),               -- instance id   
+	expires_at TIMESTAMP 
+)
 ```
 
 ---

@@ -115,7 +115,8 @@ job_executions (
 	response_body    MEDIUMTEXT NULL,   
 	created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 )  
-INDEX (job_id) INDEX (created_at)
+INDEX (job_id) 
+INDEX (created_at)
 ```
 ---
 # 🍀 **4. webhook_results**
